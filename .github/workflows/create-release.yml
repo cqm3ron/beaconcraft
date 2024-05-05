@@ -74,5 +74,5 @@ jobs:
               repo: context.repo.repo,
               release_id: releaseId,
               name: 'BCX_Assets.zip',
-              data: Buffer.from(fs.readFileSync('BCX_Assets.zip')).toString('base64')
+              data: Buffer.from('BCX_Assets.zip').toString('base64')
             });
