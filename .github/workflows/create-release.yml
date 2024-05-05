@@ -17,7 +17,9 @@ jobs:
           node-version: '14'
           
       - name: Install dependencies
-        run: npm install @actions/github
+        run: |
+          npm install @actions/github
+          npm install @octokit/rest
 
       - name: Checkout repository
         uses: actions/checkout@v2
