@@ -34,20 +34,22 @@ jobs:
             const latestRelease = response.data[0];
             const latestTag = latestRelease ? latestRelease.tag_name : 'v1.0';
             console.log('Latest Tag:', latestTag);
-            const versionParts = latestTag.split('.');
-            let major = 1;
-            let minor = 0;
-            if (latestRelease) {
-              major = parseInt(versionParts[0]);
-              minor = parseInt(versionParts[1]);
-            }
-            const newMinor = minor + 1;
-            const newTag = `v${major}.${newMinor}`;
-            console.log('New Tag:', newTag);
-            console.log('Release Body:', latestRelease ? latestRelease.body : 'Initial Release');
 
+            let newTag;
+            if (latestTag) {
+                const versionParts = latestTag.replace('v', '').split('.');
+                const major = parseInt(versionParts[0]);
+                const minor = parseInt(versionParts[1]);
+                const newMinor = minor + 1;
+                newTag = `v${major}.${newMinor.toFixed(1)}`;
+            } else {
+                newTag = 'v1.0';
+            }
+            console.log('New Tag:', newTag);
+
+            const releaseBody = latestRelease ? latestRelease.body : 'Initial Release';
             core.setOutput('new_tag', newTag);
-            core.setOutput('release_body', latestRelease ? latestRelease.body : 'Initial Release');
+            core.setOutput('release_body', releaseBody);
 
       - name: Create Release
         uses: actions/github-script@v4
