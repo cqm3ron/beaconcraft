@@ -16,11 +16,17 @@ jobs:
 
       - name: Install zip
         run: sudo apt-get install zip
-
       - name: Zip directory
         run: |
+          echo "Listing directory contents..."
+          ls -la BCX-Assets/
           echo "Zipping directory..."
           zip -r BCX_Assets.zip 'BCX-Assets/'
+
+      - name: Verify zip file size
+        run: |
+          echo "Size of BCX_Assets.zip:"
+          ls -lh BCX_Assets.zip
 
 
       - name: Get latest release
