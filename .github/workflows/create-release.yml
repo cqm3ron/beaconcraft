@@ -17,21 +17,30 @@ jobs:
       - name: Zip directory
         run: zip -r BCX_Assets.zip 'BCX Assets'
 
-      - name: Get latest release tag
-        id: get_latest_tag
-        run: |
-          TAG=$(git describe --tags $(git rev-list --tags --max-count=1))
-          echo "::set-output name=tag::$TAG"
-      
-      - name: Parse latest tag
-        id: parse_tag
-        run: |
-          IFS='.' read -ra VERSION_PARTS <<< "$TAG"
-          MAJOR="${VERSION_PARTS[0]}"
-          MINOR="${VERSION_PARTS[1]}"
-          NEW_MINOR=$(echo "$MINOR + 1" | bc)
-          NEW_TAG="$MAJOR.$NEW_MINOR"
-          echo "::set-output name=new_tag::$NEW_TAG"
+      - name: Get latest release
+        id: get_latest_release
+        uses: actions/github-script@v4
+        with:
+          github-token: ${{ secrets.GH_TOKEN }}
+          script: |
+            const response = await github.repos.listReleases({
+              owner: context.repo.owner,
+              repo: context.repo.repo
+            });
+
+            const latestRelease = response.data[0];
+            const latestTag = latestRelease ? latestRelease.tag_name : 'v1.0';
+            console.log('Latest Tag:', latestTag);
+            const versionParts = latestTag.split('.');
+            const major = parseInt(versionParts[0]);
+            const minor = parseInt(versionParts[1]);
+            const newMinor = minor + 1;
+            const newTag = `v${major}.${newMinor}`;
+            console.log('New Tag:', newTag);
+            console.log('Release Body:', latestRelease ? latestRelease.body : 'Initial Release');
+
+            core.setOutput('new_tag', newTag);
+            core.setOutput('release_body', latestRelease ? latestRelease.body : 'Initial Release');
 
       - name: Create Release
         uses: actions/github-script@v4
@@ -39,9 +48,8 @@ jobs:
           github-token: ${{ secrets.GH_TOKEN }}
           script: |
             const releaseName = 'New Release';
-            const releaseBody = 'Release Notes';
-
-            const newTag = '${{ steps.parse_tag.outputs.new_tag }}';
+            const releaseBody = '${{ steps.get_latest_release.outputs.release_body }}';
+            const newTag = '${{ steps.get_latest_release.outputs.new_tag }}';
 
             const response = await github.repos.createRelease({
               owner: context.repo.owner,
