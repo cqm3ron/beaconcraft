@@ -57,6 +57,7 @@ jobs:
         with:
           github-token: ${{ secrets.GH_TOKEN }}
           script: |
+            const fs = require('fs');
             const releaseName = 'New Release';
             const releaseBody = '${{ steps.get_latest_release.outputs.release_body }}';
             const newTag = '${{ steps.get_latest_release.outputs.new_tag }}';
@@ -70,15 +71,18 @@ jobs:
             });
 
             const uploadUrl = response.data.upload_url;
-
             const releaseId = response.data.id;
 
             // Upload the release asset
+            const zipFilePath = 'BCX_Assets.zip';
+            const zipFileData = fs.readFileSync(zipFilePath);
+            const base64ZipFileData = zipFileData.toString('base64');
             await github.repos.uploadReleaseAsset({
               url: uploadUrl,
               owner: context.repo.owner,
               repo: context.repo.repo,
               release_id: releaseId,
               name: 'BCX_Assets.zip',
-              data: Buffer.from('BCX_Assets.zip').toString('base64')
+              data: base64ZipFileData
             });
+
