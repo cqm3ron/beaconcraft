@@ -23,15 +23,15 @@ jobs:
           github-token: ${{ secrets.GH_TOKEN }}
           script: |
             const fs = require('fs');
-            const { ctx, github } = require('@actions/github');
+            const { context } = require('@actions/github');
 
             const releaseName = 'New Release';  // Set your release name here
             const releaseBody = 'Release Notes';  // Set your release notes here
 
             // Create a release
-            await gh.repos.createRelease({
-              owner: ctx.repo.owner,
-              repo: ctx.repo.repo,
+            await context.github.repos.createRelease({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
               tag_name: 'v1.0',  // Specify your tag name here
               name: releaseName,
               body: releaseBody
