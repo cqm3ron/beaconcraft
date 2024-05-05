@@ -19,7 +19,7 @@ jobs:
 
       - name: Calculate next version
         id: calculate_next_version
-        run: echo "::set-output name=next_version::$(echo "${{ steps.read_version.outputs.version }}" | awk -F '.' '{ printf "%.1f", $1 + 0.1 }')"
+        run: echo "::set-output name=next_version::$(awk -v ver="${{ steps.read_version.outputs.version }}" 'BEGIN { printf "%.1f", ver + 0.1 }')"
 
       - name: Create release zip
         id: create_release_zip
