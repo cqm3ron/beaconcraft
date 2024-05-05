@@ -29,6 +29,13 @@ jobs:
           echo "Size of BCX_Assets.zip:"
           ls -lh BCX_Assets.zip
 
+      - name: Debugging
+        run: |
+          echo "Current directory contents:"
+          ls -la
+          echo "Checking the existence of BCX_Assets.zip:"
+          ls -la BCX_Assets.zip
+
       - name: Get latest release
         id: get_latest_release
         uses: actions/github-script@v4
