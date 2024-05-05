@@ -63,10 +63,12 @@ jobs:
 
             const releaseId = response.data.id;
 
+            // Upload the release asset
             await github.repos.uploadReleaseAsset({
+              url: uploadUrl,
               owner: context.repo.owner,
               repo: context.repo.repo,
               release_id: releaseId,
               name: 'BCX_Assets.zip',
-              data: fs.readFileSync('BCX_Assets.zip')
+              data: Buffer.from(fs.readFileSync('BCX_Assets.zip')).toString('base64')
             });
