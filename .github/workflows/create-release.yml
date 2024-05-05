@@ -25,7 +25,7 @@ jobs:
         id: create_release_zip
         run: |
           shopt -s extglob
-          zip -r release.zip !(.github)
+          zip -r "BCX_Assets_Version_${{ steps.calculate_next_version.outputs.next_version }}.zip" !(.github)
         if: ${{ !contains(github.event.head_commit.modified, '.github/') }}
 
       - name: Create Release
@@ -46,6 +46,6 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ./release.zip
-          asset_name: release.zip
+          asset_path: ./BCX_Assets_Version_${{ steps.calculate_next_version.outputs.next_version }}.zip
+          asset_name: BCX_Assets_Version_${{ steps.calculate_next_version.outputs.next_version }}.zip
           asset_content_type: application/zip
