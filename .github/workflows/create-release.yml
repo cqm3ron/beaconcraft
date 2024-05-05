@@ -80,7 +80,7 @@ jobs:
             const releaseId = response.data.id;
 
             // Upload the release asset
-            const zipFilePath = 'BCX_Assets.zip';
+            const zipFilePath = 'BCX_Assets.zip'; // Update the path here
             const zipFileData = fs.readFileSync(zipFilePath);
             const base64ZipFileData = zipFileData.toString('base64');
             await github.repos.uploadReleaseAsset({
