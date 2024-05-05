@@ -20,8 +20,6 @@ jobs:
       - name: Zip directory
         run: |
           zip -r BCX_Assets.zip 'BCX Assets/'
-          ls -l
-          pwd
 
       - name: Get latest release
         id: get_latest_release
