@@ -1,0 +1,29 @@
+name: Create Release
+
+on:
+  push:
+    paths:
+      - 'BCX Assets/**'  # Specify the directory to monitor for changes
+    branches:
+      - main  # Specify the branch to trigger the workflow
+
+jobs:
+  create_release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+      
+      - name: Zip directory
+        run: zip -r BCX_Assets.zip 'BCX Assets'
+
+      - name: Create Release
+        uses: actions/github-script@v4
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const fs = require('fs');
+            const { context, github } = require('@actions/github');
+
+            const releaseName = 'New Release';  // Set your release name here
+            const releaseBody = 'Release Notes';  // Set your 
