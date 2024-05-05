@@ -83,7 +83,7 @@ jobs:
           cd ${{ github.workspace }}
           node - <<EOF
             const fs = require('fs');
-            const github = require('@actions/github'); // Importing the '@actions/github' module
+            const github = require('/home/runner/work/_actions/github/<version>/dist/index.js');
             const core = require('@actions/core');
           
             async function createRelease() {
