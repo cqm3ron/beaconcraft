@@ -60,7 +60,7 @@ jobs:
             core.setOutput('new_tag', newTag);
             core.setOutput('release_body', releaseBody);
 
-            - name: Release
+      - name: Release
         run: |
           cd ${{ github.workspace }}
           node - <<EOF
