@@ -18,9 +18,8 @@ jobs:
         run: sudo apt-get install zip
 
       - name: Zip directory
-        run: |
-          cd BCX Assets
-          zip -r BCX_Assets.zip .
+        run: zip -r BCX_Assets.zip 'BCX Assets/'
+
 
       - name: Get latest release
         id: get_latest_release
