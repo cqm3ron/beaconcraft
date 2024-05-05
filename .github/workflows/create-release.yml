@@ -13,9 +13,12 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
+
+      - name: Install zip
+        run: sudo apt-get install zip
       
       - name: Zip directory
-        run: zip -r BCX_Assets.zip 'BCX Assets'
+        run: zip -r BCX_Assets.zip 'BCX Assets/*'
 
       - name: Get latest release
         id: get_latest_release
