@@ -60,7 +60,7 @@ jobs:
             core.setOutput('new_tag', newTag);
             core.setOutput('release_body', releaseBody);
 
-      - name: Create Release
+      - name: Release
         uses: actions/github-script@v4
         with:
           github-token: ${{ secrets.GH_TOKEN }}
