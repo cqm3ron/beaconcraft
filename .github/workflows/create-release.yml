@@ -3,7 +3,7 @@ name: Create Release
 on:
   push:
     paths:
-      - 'beaconcraft/BCX Assets/**'
+      - 'BCX Assets/**'
     branches:
       - main
 
@@ -19,8 +19,8 @@ jobs:
 
       - name: Zip directory
         run: |
-          cd beaconcraft
-          zip -r BCX_Assets.zip 'BCX Assets/'
+          cd BCX Assets
+          zip -r BCX_Assets.zip .
 
       - name: Get latest release
         id: get_latest_release
@@ -78,7 +78,7 @@ jobs:
             const releaseId = response.data.id;
 
             // Upload the release asset
-            const zipFilePath = 'beaconcraft/BCX_Assets.zip'; // Update the path here
+            const zipFilePath = 'BCX_Assets.zip'; // Update the path here
             console.log('Zip File Path:', zipFilePath);
             const zipFileData = fs.readFileSync(zipFilePath);
             console.log('Zip File Size:', zipFileData.length);
