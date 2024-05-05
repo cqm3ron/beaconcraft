@@ -3,7 +3,7 @@ name: Create Release
 on:
   push:
     paths:
-      - 'BCX Assets/**'
+      - 'BCX-Assets/**'
     branches:
       - main
 
@@ -20,7 +20,7 @@ jobs:
       - name: Zip directory
         run: |
           echo "Zipping directory..."
-          zip -r BCX_Assets.zip 'BCX Assets/'
+          zip -r BCX_Assets.zip 'BCX-Assets/'
 
 
       - name: Get latest release
