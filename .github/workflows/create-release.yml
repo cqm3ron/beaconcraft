@@ -1,134 +1,26 @@
-name: Create Release
+name: Create Release on Main Changes
 
 on:
   push:
-    paths:
-      - 'BCX-Assets/**'
     branches:
       - main
 
 jobs:
-  create_release:
+  build:
     runs-on: ubuntu-latest
+
     steps:
-      - name: Set up Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: '14'
-          
-      - name: Install dependencies
-        run: |
-          npm install @actions/github
-          npm install @octokit/rest
-
-
-      - name: Checkout repository
+      - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: Install zip
-        run: sudo apt-get install zip
-
-      - name: Zip directory
+      - name: Create release zip
         run: |
-          echo "Listing directory contents..."
-          ls -la BCX-Assets/
-          echo "Zipping directory..."
-          zip -r BCX_Assets.zip 'BCX-Assets/'
+          shopt -s extglob
+          zip -r release.zip !(.github)
+        if: ${{ !contains(github.event.head_commit.modified, '.github/') }}
 
-      - name: Verify zip file size
-        run: |
-          echo "Size of BCX_Assets.zip:"
-          ls -lh BCX_Assets.zip
-
-      - name: Debugging
-        run: |
-          echo "Current directory contents:"
-          ls -la
-          echo "Checking the existence of BCX_Assets.zip:"
-          ls -la BCX_Assets.zip
-
-      - name: Get latest release
-        id: get_latest_release
-        uses: actions/github-script@v4
+      - name: Upload release zip
+        uses: actions/upload-artifact@v2
         with:
-          github-token: ${{ secrets.GH_TOKEN }}
-          script: |
-            const response = await github.repos.listReleases({
-              owner: context.repo.owner,
-              repo: context.repo.repo
-            });
-
-            const latestRelease = response.data[0];
-            const latestTag = latestRelease ? latestRelease.tag_name : 'v1.0';
-            console.log('Latest Tag:', latestTag);
-
-            let newTag;
-            if (latestTag) {
-                const versionParts = latestTag.replace('v', '').split('.');
-                const major = parseInt(versionParts[0]);
-                const minor = parseInt(versionParts[1]);
-                const newMinor = minor + 1;
-                newTag = `v${major}.${newMinor.toFixed(1)}`;
-            } else {
-                newTag = 'v1.0';
-            }
-            console.log('New Tag:', newTag);
-
-            const releaseBody = latestRelease ? latestRelease.body : 'Initial Release';
-            core.setOutput('new_tag', newTag);
-            core.setOutput('release_body', releaseBody);
-            
-      - name: Release
-        run: |
-          cd ${{ github.workspace }}
-          node - <<EOF
-            const fs = require('fs');
-            const github = require('/home/runner/work/_actions/github/<version>/dist/index.js');
-            const core = require('@actions/core');
-          
-            async function createRelease() {
-              const context = github.context;
-              const releaseName = 'New Release';
-              const releaseBody = '${{ steps.get_latest_release.outputs.release_body }}';
-              const newTag = '${{ steps.get_latest_release.outputs.new_tag }}';
-          
-              console.log('Release Body:', releaseBody);
-              console.log('New Tag:', newTag);
-          
-              const octokit = github.getOctokit(process.env.GITHUB_TOKEN);
-              const response = await octokit.repos.createRelease({
-                owner: context.repo.owner,
-                repo: context.repo.repo,
-                tag_name: newTag,
-                name: releaseName,
-                body: releaseBody
-              });
-          
-              const uploadUrl = response.data.upload_url;
-              const releaseId = response.data.id;
-          
-              // Verify the existence of the zip file and list its contents
-              console.log('Listing directory contents...');
-              console.log(fs.readdirSync('.'));
-              console.log('Checking for the zip file...');
-              console.log(fs.existsSync('BCX_Assets.zip'));
-          
-              // Upload the release asset
-              const zipFilePath = 'BCX_Assets.zip';
-              const zipFileData = fs.readFileSync(zipFilePath);
-              const base64ZipFileData = zipFileData.toString('base64');
-              await octokit.repos.uploadReleaseAsset({
-                url: uploadUrl,
-                owner: context.repo.owner,
-                repo: context.repo.repo,
-                release_id: releaseId,
-                name: 'BCX_Assets.zip',
-                data: base64ZipFileData
-              });
-            }
-          
-            createRelease().catch(error => {
-              console.error('Error creating release:', error);
-              process.exit(1);
-            });
-          EOF
+          name: release
+          path: release.zip
