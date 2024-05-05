@@ -52,6 +52,8 @@ jobs:
         with:
           github-token: ${{ secrets.GH_TOKEN }}
           script: |
+            const github = require('@actions/github');
+            const context = github.context;
             const response = await github.repos.listReleases({
               owner: context.repo.owner,
               repo: context.repo.repo
@@ -83,8 +85,10 @@ jobs:
           node - <<EOF
             const fs = require('fs');
             const github = require('@actions/github');
+            const core = require('@actions/core');
           
             async function createRelease() {
+              const context = github.context;
               const releaseName = 'New Release';
               const releaseBody = '${{ steps.get_latest_release.outputs.release_body }}';
               const newTag = '${{ steps.get_latest_release.outputs.new_tag }}';
