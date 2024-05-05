@@ -84,11 +84,18 @@ jobs:
             const uploadUrl = response.data.upload_url;
             const releaseId = response.data.id;
 
-            // Upload the release asset
-            const zipFilePath = 'BCX_Assets.zip'; // Update the path here
-            console.log('Zip File Path:', zipFilePath);
+            // Debugging: Print the contents of the zip file
+            const zipFilePath = 'BCX_Assets.zip';
+            console.log('Zip File Contents:', fs.readdirSync(zipFilePath));
+
+            // Debugging: Print the size of the zip file
+            console.log('Zip File Size:', fs.statSync(zipFilePath).size);
+
+            // Debugging: Print the base64 encoding of the zip file data
             const zipFileData = fs.readFileSync(zipFilePath);
-            console.log('Zip File Size:', zipFileData.length);
+            console.log('Base64 Zip File Data:', zipFileData.toString('base64'));
+
+            // Upload the release asset
             const base64ZipFileData = zipFileData.toString('base64');
             await github.repos.uploadReleaseAsset({
               url: uploadUrl,
