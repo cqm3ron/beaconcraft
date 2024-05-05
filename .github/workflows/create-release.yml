@@ -60,11 +60,10 @@ jobs:
             core.setOutput('new_tag', newTag);
             core.setOutput('release_body', releaseBody);
 
-      - name: Release
-        uses: actions/github-script@v4
-        with:
-          github-token: ${{ secrets.GH_TOKEN }}
-          script: |
+            - name: Release
+        run: |
+          cd ${{ github.workspace }}
+          node - <<EOF
             const fs = require('fs');
             const releaseName = 'New Release';
             const releaseBody = '${{ steps.get_latest_release.outputs.release_body }}';
@@ -84,18 +83,15 @@ jobs:
             const uploadUrl = response.data.upload_url;
             const releaseId = response.data.id;
 
-            // Debugging: Print the contents of the zip file
-            const zipFilePath = 'BCX_Assets.zip';
-            console.log('Zip File Contents:', fs.readdirSync(zipFilePath));
-
-            // Debugging: Print the size of the zip file
-            console.log('Zip File Size:', fs.statSync(zipFilePath).size);
-
-            // Debugging: Print the base64 encoding of the zip file data
-            const zipFileData = fs.readFileSync(zipFilePath);
-            console.log('Base64 Zip File Data:', zipFileData.toString('base64'));
+            // Verify the existence of the zip file and list its contents
+            console.log('Listing directory contents...');
+            console.log(fs.readdirSync('.'));
+            console.log('Checking for the zip file...');
+            console.log(fs.existsSync('BCX_Assets.zip'));
 
             // Upload the release asset
+            const zipFilePath = 'BCX_Assets.zip';
+            const zipFileData = fs.readFileSync(zipFilePath);
             const base64ZipFileData = zipFileData.toString('base64');
             await github.repos.uploadReleaseAsset({
               url: uploadUrl,
@@ -105,3 +101,4 @@ jobs:
               name: 'BCX_Assets.zip',
               data: base64ZipFileData
             });
+          EOF
