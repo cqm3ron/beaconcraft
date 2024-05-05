@@ -14,18 +14,14 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v2
 
-      - name: List files in current directory
-        run: ls -l
-
-      - name: Print current directory
-        run: pwd
-
       - name: Install zip
         run: sudo apt-get install zip
 
       - name: Zip directory
-        run: zip -r BCX_Assets.zip 'BCX Assets/'
-
+        run: |
+          zip -r BCX_Assets.zip 'BCX Assets/'
+          ls -l
+          pwd
 
       - name: Get latest release
         id: get_latest_release
@@ -67,7 +63,10 @@ jobs:
             const releaseName = 'New Release';
             const releaseBody = '${{ steps.get_latest_release.outputs.release_body }}';
             const newTag = '${{ steps.get_latest_release.outputs.new_tag }}';
-    
+
+            console.log('Release Body:', releaseBody);
+            console.log('New Tag:', newTag);
+
             const response = await github.repos.createRelease({
               owner: context.repo.owner,
               repo: context.repo.repo,
@@ -81,7 +80,9 @@ jobs:
 
             // Upload the release asset
             const zipFilePath = 'BCX_Assets.zip'; // Update the path here
+            console.log('Zip File Path:', zipFilePath);
             const zipFileData = fs.readFileSync(zipFilePath);
+            console.log('Zip File Size:', zipFileData.length);
             const base64ZipFileData = zipFileData.toString('base64');
             await github.repos.uploadReleaseAsset({
               url: uploadUrl,
