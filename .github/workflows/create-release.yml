@@ -54,31 +54,38 @@ jobs:
           script: |
             const github = require('@actions/github');
             const context = github.context;
-            const response = await github.repos.listReleases({
-              owner: context.repo.owner,
-              repo: context.repo.repo
-            });
+            
+            async function getLatestRelease() {
+              const response = await github.repos.listReleases({
+                owner: context.repo.owner,
+                repo: context.repo.repo
+              });
 
-            const latestRelease = response.data[0];
-            const latestTag = latestRelease ? latestRelease.tag_name : 'v1.0';
-            console.log('Latest Tag:', latestTag);
+              const latestRelease = response.data[0];
+              const latestTag = latestRelease ? latestRelease.tag_name : 'v1.0';
+              console.log('Latest Tag:', latestTag);
 
-            let newTag;
-            if (latestTag) {
-                const versionParts = latestTag.replace('v', '').split('.');
-                const major = parseInt(versionParts[0]);
-                const minor = parseInt(versionParts[1]);
-                const newMinor = minor + 1;
-                newTag = `v${major}.${newMinor.toFixed(1)}`;
-            } else {
-                newTag = 'v1.0';
+              let newTag;
+              if (latestTag) {
+                  const versionParts = latestTag.replace('v', '').split('.');
+                  const major = parseInt(versionParts[0]);
+                  const minor = parseInt(versionParts[1]);
+                  const newMinor = minor + 1;
+                  newTag = `v${major}.${newMinor.toFixed(1)}`;
+              } else {
+                  newTag = 'v1.0';
+              }
+              console.log('New Tag:', newTag);
+
+              const releaseBody = latestRelease ? latestRelease.body : 'Initial Release';
+              core.setOutput('new_tag', newTag);
+              core.setOutput('release_body', releaseBody);
             }
-            console.log('New Tag:', newTag);
-
-            const releaseBody = latestRelease ? latestRelease.body : 'Initial Release';
-            core.setOutput('new_tag', newTag);
-            core.setOutput('release_body', releaseBody);
-
+            
+            getLatestRelease().catch(error => {
+              console.error('Error getting latest release:', error);
+              process.exit(1);
+            });
       - name: Release
         run: |
           cd ${{ github.workspace }}
