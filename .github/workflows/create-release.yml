@@ -72,50 +72,40 @@ jobs:
           cd ${{ github.workspace }}
           node - <<EOF
             const fs = require('fs');
-            const github = require('@actions/github');
-      
-            async function createRelease() {
-              const releaseName = 'New Release';
-              const releaseBody = '${{ steps.get_latest_release.outputs.release_body }}';
-              const newTag = '${{ steps.get_latest_release.outputs.new_tag }}';
-      
-              console.log('Release Body:', releaseBody);
-              console.log('New Tag:', newTag);
-      
-              const octokit = github.getOctokit(process.env.GITHUB_TOKEN);
-              const response = await octokit.repos.createRelease({
-                owner: context.repo.owner,
-                repo: context.repo.repo,
-                tag_name: newTag,
-                name: releaseName,
-                body: releaseBody
-              });
-      
-              const uploadUrl = response.data.upload_url;
-              const releaseId = response.data.id;
-      
-              // Verify the existence of the zip file and list its contents
-              console.log('Listing directory contents...');
-              console.log(fs.readdirSync('.'));
-              console.log('Checking for the zip file...');
-              console.log(fs.existsSync('BCX_Assets.zip'));
-      
-              // Upload the release asset
-              const zipFilePath = 'BCX_Assets.zip';
-              const zipFileData = fs.readFileSync(zipFilePath);
-              const base64ZipFileData = zipFileData.toString('base64');
-              await octokit.repos.uploadReleaseAsset({
-                url: uploadUrl,
-                owner: context.repo.owner,
-                repo: context.repo.repo,
-                release_id: releaseId,
-                name: 'BCX_Assets.zip',
-                data: base64ZipFileData
-              });
-            }
-      
-            createRelease().catch(error => {
-              console.error('Error creating release:', error);
-              process.exit(1);
+            const releaseName = 'New Release';
+            const releaseBody = '${{ steps.get_latest_release.outputs.release_body }}';
+            const newTag = '${{ steps.get_latest_release.outputs.new_tag }}';
+
+            console.log('Release Body:', releaseBody);
+            console.log('New Tag:', newTag);
+
+            const response = await github.repos.createRelease({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              tag_name: newTag,
+              name: releaseName,
+              body: releaseBody
+            });
+
+            const uploadUrl = response.data.upload_url;
+            const releaseId = response.data.id;
+
+            // Verify the existence of the zip file and list its contents
+            console.log('Listing directory contents...');
+            console.log(fs.readdirSync('.'));
+            console.log('Checking for the zip file...');
+            console.log(fs.existsSync('BCX_Assets.zip'));
+
+            // Upload the release asset
+            const zipFilePath = 'BCX_Assets.zip';
+            const zipFileData = fs.readFileSync(zipFilePath);
+            const base64ZipFileData = zipFileData.toString('base64');
+            await github.repos.uploadReleaseAsset({
+              url: uploadUrl,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              release_id: releaseId,
+              name: 'BCX_Assets.zip',
+              data: base64ZipFileData
             });
           EOF
