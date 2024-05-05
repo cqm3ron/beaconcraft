@@ -29,7 +29,7 @@ jobs:
             const releaseBody = 'Release Notes';  // Set your release notes here
 
             // Create a release
-            await github.repos.createRelease({
+            await gh.repos.createRelease({
               owner: ctx.repo.owner,
               repo: ctx.repo.repo,
               tag_name: 'v1.0',  // Specify your tag name here
