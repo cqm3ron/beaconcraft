@@ -61,7 +61,7 @@ jobs:
             const releaseName = 'New Release';
             const releaseBody = '${{ steps.get_latest_release.outputs.release_body }}';
             const newTag = '${{ steps.get_latest_release.outputs.new_tag }}';
-
+    
             const response = await github.repos.createRelease({
               owner: context.repo.owner,
               repo: context.repo.repo,
