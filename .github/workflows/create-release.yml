@@ -20,6 +20,11 @@ jobs:
       - name: Zip directory
         run: zip -r BCX_Assets.zip 'BCX Assets/'
 
-      - name: Show zip file location
+      # Add a step to commit and push the zip file
+      - name: Commit and push zip file
         run: |
-          echo "Zip file location: $(pwd)/BCX_Assets.zip"
+          git config --global user.email "actions@github.com"
+          git config --global user.name "GitHub Actions"
+          git add BCX_Assets.zip
+          git commit -m "Add BCX Assets zip file"
+          git push
