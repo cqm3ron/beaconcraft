@@ -4,7 +4,22 @@
       "layer0": "minecraft:item/paper"
     },
     "overrides": [
-    {"predicate": {"custom_model_data": 1}, "model": "item/standardpermit"},
-    {"predicate": {"custom_model_data": 2}, "model": "item/premiumpermit"}
+    {"predicate": {"custom_model_data": 99}, "model": "item/standardpermit"},
+    {"predicate": {"custom_model_data": 100}, "model": "item/premiumpermit"},
+    {"model":"analog:item/radio_off","predicate":{"custom_model_data":2}},
+    {"model":"analog:item/radio_on","predicate":{"custom_model_data":3}},
+    {"model":"analog:item/transmitter","predicate":{"custom_model_data":4}},
+    {"model":"analog:item/receiver","predicate":{"custom_model_data":5}},
+    {"model":"analog:gui/radio_start_transmit_button","predicate":{"custom_model_data":6}},
+    {"model":"analog:gui/radio_stop_transmit_button","predicate":{"custom_model_data":7}},
+    {"model":"analog:gui/radio_start_receive_button","predicate":{"custom_model_data":8}},
+    {"model":"analog:gui/radio_stop_receive_button","predicate":{"custom_model_data":9}},
+    {"model":"analog:gui/radio_channel_up_button","predicate":{"custom_model_data":10}},
+    {"model":"analog:gui/radio_channel_down_button","predicate":{"custom_model_data":11}},
+    {"model":"analog:gui/radio_set_channel_button","predicate":{"custom_model_data":12}},
+    {"model":"analog:gui/radio_enable_button","predicate":{"custom_model_data":13}},
+    {"model":"analog:gui/radio_disable_button","predicate":{"custom_model_data":14}},
+    {"model":"analog:block/transmitter","predicate":{"custom_model_data":15}},
+    {"model":"analog:block/receiver","predicate":{"custom_model_data":16}}
     ]
   }
