@@ -4,8 +4,6 @@
       "layer0": "minecraft:item/paper"
     },
     "overrides": [
-    {"predicate": {"custom_model_data": 99}, "model": "item/standardpermit"},
-    {"predicate": {"custom_model_data": 100}, "model": "item/premiumpermit"},
     {"model":"analog:item/radio_off","predicate":{"custom_model_data":2}},
     {"model":"analog:item/radio_on","predicate":{"custom_model_data":3}},
     {"model":"analog:item/transmitter","predicate":{"custom_model_data":4}},
