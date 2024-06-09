@@ -18,6 +18,8 @@
     {"model":"analog:gui/radio_enable_button","predicate":{"custom_model_data":13}},
     {"model":"analog:gui/radio_disable_button","predicate":{"custom_model_data":14}},
     {"model":"analog:block/transmitter","predicate":{"custom_model_data":15}},
-    {"model":"analog:block/receiver","predicate":{"custom_model_data":16}}
+    {"model":"analog:block/receiver","predicate":{"custom_model_data":16}},
+    {"model":"minecraft:item/standardpermit","predicate":{"custom_model_data":99}},
+    {"model":"minecraft:item/premiumpermit","predicate":{"custom_model_data":100}}
     ]
   }
