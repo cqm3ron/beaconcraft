@@ -1,9 +1,9 @@
 {
-    "parent": "minecraft:item/generated",
-    "textures": {
-      "layer0": "minecraft:item/paper"
-    },
-    "overrides": [
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "minecraft:item/paper"
+  },
+  "overrides": [
     {"model":"analog:item/radio_off","predicate":{"custom_model_data":2}},
     {"model":"analog:item/radio_on","predicate":{"custom_model_data":3}},
     {"model":"analog:item/transmitter","predicate":{"custom_model_data":4}},
@@ -20,6 +20,23 @@
     {"model":"analog:block/transmitter","predicate":{"custom_model_data":15}},
     {"model":"analog:block/receiver","predicate":{"custom_model_data":16}},
     {"model":"minecraft:item/standardpermit","predicate":{"custom_model_data":99}},
-    {"model":"minecraft:item/premiumpermit","predicate":{"custom_model_data":100}}
-    ]
-  }
+    {"model":"minecraft:item/premiumpermit","predicate":{"custom_model_data":100}},
+    {"model":"minecraft:item/__a1ice_stamp","predicate":{"custom_model_data":200}},
+    {"model":"minecraft:item/_viper5__stamp","predicate":{"custom_model_data":201}},
+    {"model":"minecraft:item/ashey_22_stamp","predicate":{"custom_model_data":202}},
+    {"model":"minecraft:item/bluga__stamp","predicate":{"custom_model_data":203}},
+    {"model":"minecraft:item/buggss__stamp","predicate":{"custom_model_data":204}},
+    {"model":"minecraft:item/cqm3ron_stamp","predicate":{"custom_model_data":205}},
+    {"model":"minecraft:item/daniboii234_stamp","predicate":{"custom_model_data":206}},
+    {"model":"minecraft:item/forgot_ten1_stamp","predicate":{"custom_model_data":207}},
+    {"model":"minecraft:item/icewhal_stamp","predicate":{"custom_model_data":208}},
+    {"model":"minecraft:item/mlgmilkguy674332_stamp","predicate":{"custom_model_data":209}},
+    {"model":"minecraft:item/mycelium_hobnob_stamp","predicate":{"custom_model_data":210}},
+    {"model":"minecraft:item/southernfir_stamp","predicate":{"custom_model_data":211}},
+    {"model":"minecraft:item/thunderboy_14_stamp","predicate":{"custom_model_data":212}},
+    {"model":"minecraft:item/ttwwiiccee___stamp","predicate":{"custom_model_data":213}},
+    {"model":"minecraft:item/whale_369_stamp","predicate":{"custom_model_data":214}},
+    {"model":"minecraft:item/wollyp0g_stamp","predicate":{"custom_model_data":215}},
+    {"model":"minecraft:item/yandavy_stamp","predicate":{"custom_model_data":216}}
+  ]
+}
