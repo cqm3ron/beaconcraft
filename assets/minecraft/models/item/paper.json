@@ -19,6 +19,7 @@
     {"model":"analog:gui/radio_disable_button","predicate":{"custom_model_data":14}},
     {"model":"analog:block/transmitter","predicate":{"custom_model_data":15}},
     {"model":"analog:block/receiver","predicate":{"custom_model_data":16}},
+    {"model":"minecraft:item/diamond","predicate":{"custom_model_data":69}},
     {"model":"minecraft:item/standardpermit","predicate":{"custom_model_data":99}},
     {"model":"minecraft:item/premiumpermit","predicate":{"custom_model_data":100}},
     {"model":"minecraft:item/__a1ice_stamp","predicate":{"custom_model_data":200}},
@@ -37,7 +38,5 @@
     {"model":"minecraft:item/ttwwiiccee___stamp","predicate":{"custom_model_data":213}},
     {"model":"minecraft:item/whale_369_stamp","predicate":{"custom_model_data":214}},
     {"model":"minecraft:item/wollyp0g_stamp","predicate":{"custom_model_data":215}},
-    {"model":"minecraft:item/yandavy_stamp","predicate":{"custom_model_data":216}},
-    {"model":"minecraft:item/diamond","predicate":{"custom_model_data":69}}
-  ]
+    {"model":"minecraft:item/yandavy_stamp","predicate":{"custom_model_data":216}}  ]
 }
