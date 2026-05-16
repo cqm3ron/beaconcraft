@@ -1,0 +1,46 @@
+[
+  {
+    "function": "minecraft:set_lore",
+    "mode": "replace_section",
+    "offset": 1,
+    "size": 1,
+    "entity": "this",
+    "lore": [
+      [
+        {
+          "text": "Shop: ",
+          "color": "dark_gray",
+          "italic": false
+        },
+        {
+          "nbt": "SelectedItem.components.\"minecraft:custom_name\"",
+          "source": "entity",
+          "entity": "@s",
+          "interpret": true,
+          "color": "white",
+          "italic": false
+        }
+      ]
+    ]
+  },
+  {
+    "function": "minecraft:copy_custom_data",
+    "source": {
+      "type": "storage",
+      "source": "permits:shop"
+    },
+    "ops": [
+      {
+        "source": "shop",
+        "target": "shop",
+        "op": "replace"
+      }
+    ]
+  },
+  {
+    "function": "minecraft:set_components",
+    "components": {
+      "!minecraft:custom_name": {}
+    }
+  }
+]

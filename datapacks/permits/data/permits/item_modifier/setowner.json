@@ -1,0 +1,41 @@
+[
+  {
+    "function": "minecraft:copy_custom_data",
+    "source": "this",
+    "ops": [
+      {
+        "source": "UUID",
+        "target": "owner",
+        "op": "replace"
+      }
+    ]
+  },
+  {
+    "function": "minecraft:set_lore",
+    "mode": "replace_section",
+    "offset": 0,
+    "size": 1,
+    "entity": "this",
+    "lore": [
+      [
+        {
+          "text": "Owner: ",
+          "color": "gray",
+          "italic": false
+        },
+        {
+          "selector": "@s",
+          "color": "white",
+          "italic": false
+        }
+      ]
+    ]
+  },
+  {
+    "function": "minecraft:set_components",
+    "components": {
+      "!minecraft:custom_name": {},
+      "minecraft:repair_cost": 2147483647
+    }
+  }
+]

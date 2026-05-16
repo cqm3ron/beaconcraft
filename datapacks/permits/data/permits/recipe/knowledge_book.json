@@ -1,0 +1,83 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "#/#",
+    "_I_",
+    "#@#"
+  ],
+  "key": {
+    "#": "minecraft:polished_andesite",
+    "/": "minecraft:stick",
+    "_": "minecraft:paper",
+    "I": "minecraft:diamond",
+    "@": "minecraft:ink_sac"
+  },
+  "result": {
+    "id": "minecraft:knowledge_book",
+    "components": {
+      "minecraft:custom_model_data": {
+        "strings": [
+          "permit"
+        ]
+      },
+      "minecraft:attribute_modifiers": [
+        {
+          "type": "minecraft:luck",
+          "id": "minecraft:",
+          "amount": 0.1,
+          "operation": "add_value",
+          "slot": "head",
+          "display": {
+            "type": "hidden"
+          }
+        }
+      ],
+      "minecraft:item_name": {
+        "text": "Vendor's Permit",
+        "type": "text",
+        "color": "gold",
+        "bold": true,
+        "italic": false
+      },
+      "minecraft:lore": [
+        {
+          "text": "Owner: Unclaimed",
+          "color": "gray",
+          "italic": false
+        },
+        {
+          "text": "Shop: Unassigned",
+          "color": "dark_gray",
+          "italic": false
+        }
+      ],
+      "minecraft:custom_data": {
+        "owner": "null",
+        "shop": "Unassigned"
+      },
+      "minecraft:damage_resistant": {
+        "types": [
+          "cactus",
+          "generic",
+          "generic_kill",
+          "wither",
+          "wither_skull",
+          "unattributed_fireball",
+          "out_of_world",
+          "outside_border",
+          "explosion",
+          "falling_anvil",
+          "fireball",
+          "in_fire",
+          "on_fire",
+          "lightning_bolt",
+          "lava",
+          "player_explosion"
+        ]
+      },
+      "minecraft:max_stack_size": 1
+    },
+    "count": 1
+  }
+}

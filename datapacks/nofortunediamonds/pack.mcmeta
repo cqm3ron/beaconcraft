@@ -1,0 +1,10 @@
+{
+  "pack": {
+    "description": "Disables the use of the Fortune enchantment on diamond ores",
+    "min_format": [
+      101,
+      1
+    ],
+    "max_format": 101
+  }
+}
