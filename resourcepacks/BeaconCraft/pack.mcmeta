@@ -1,6 +1,6 @@
 {
   "pack": {
-    "description": "BeaconCraft Pack",
+    "description": "The BeaconCraft Pack",
     "supported_formats": {
       "min_inclusive": 84,
       "max_inclusive": 86
