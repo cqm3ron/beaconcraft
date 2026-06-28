@@ -4,14 +4,13 @@
   "pattern": [
     "#/#",
     "_I_",
-    "#@#"
+    "#/#"
   ],
   "key": {
     "#": "minecraft:polished_andesite",
     "/": "minecraft:stick",
     "_": "minecraft:paper",
-    "I": "minecraft:diamond",
-    "@": "minecraft:ink_sac"
+    "I": "minecraft:ink_sac"
   },
   "result": {
     "id": "minecraft:knowledge_book",
@@ -21,18 +20,6 @@
           "permit"
         ]
       },
-      "minecraft:attribute_modifiers": [
-        {
-          "type": "minecraft:luck",
-          "id": "minecraft:",
-          "amount": 0.1,
-          "operation": "add_value",
-          "slot": "head",
-          "display": {
-            "type": "hidden"
-          }
-        }
-      ],
       "minecraft:item_name": {
         "text": "Vendor's Permit",
         "type": "text",
@@ -54,7 +41,8 @@
       ],
       "minecraft:custom_data": {
         "owner": "null",
-        "shop": "Unassigned"
+        "shop": "Unassigned",
+        "permit": true
       },
       "minecraft:damage_resistant": {
         "types": [

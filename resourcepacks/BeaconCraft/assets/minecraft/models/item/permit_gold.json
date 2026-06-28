@@ -1,0 +1,7 @@
+{
+  "parent": "item/permit",
+  "textures": {
+    "1": "item/permit_gold",
+    "particle": "item/permit_gold"
+  }
+}

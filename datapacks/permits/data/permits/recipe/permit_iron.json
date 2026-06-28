@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:smithing_transform",
+  "base": "minecraft:knowledge_book",
+  "addition": "minecraft:iron_ingot",
+  "result": {
+    "id": "minecraft:poisonous_potato",
+    "components": {
+      "minecraft:custom_model_data": {
+        "strings": [
+          "iron_permit"
+        ]
+      },
+      "!minecraft:consumable": {},
+      "minecraft:item_model": "minecraft:knowledge_book"
+    }
+  }
+}
