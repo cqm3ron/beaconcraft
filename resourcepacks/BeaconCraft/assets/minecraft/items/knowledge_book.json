@@ -18,21 +18,21 @@
         "when": "diamond_permit",
         "model": {
           "type": "model",
-          "model": "item/diamond_permit"
+          "model": "item/permit_diamond"
         }
       },
       {
         "when": "gold_permit",
         "model": {
           "type": "model",
-          "model": "item/gold_permit"
+          "model": "item/permit_gold"
         }
       },
       {
         "when": "iron_permit",
         "model": {
           "type": "model",
-          "model": "item/iron_permit"
+          "model": "item/permit_iron"
         }
       }
     ]
