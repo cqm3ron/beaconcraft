@@ -1,1 +1,0 @@
-execute as @n[type=item] if data entity @s components."minecraft:custom_data".owner
