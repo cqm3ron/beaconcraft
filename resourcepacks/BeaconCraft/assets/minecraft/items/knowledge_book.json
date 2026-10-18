@@ -34,6 +34,13 @@
           "type": "model",
           "model": "item/permit_iron"
         }
+      },
+      {
+        "when": "advert",
+        "model": {
+          "type": "model",
+          "model": "item/townhalladvert"
+        }
       }
     ]
   }
